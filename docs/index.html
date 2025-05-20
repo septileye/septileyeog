@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Septileye | Minecraft Channel</title>
+
+  <!-- Font Awesome for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff6f00 65%, #000000 100%);
+      color: #f0f0f0;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Animated black glint overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(0,0,0,0.05) 0,
+          rgba(0,0,0,0.05) 12px,
+          rgba(0,0,0,0.12) 13px,
+          rgba(0,0,0,0.12) 20px
+        );
+      animation: glintMove 12s linear infinite;
+      z-index: -1;
+    }
+    @keyframes glintMove {
+      0% { transform: translateX(-25%) translateY(0) rotate(45deg); }
+      100% { transform: translateX(25%) translateY(0) rotate(45deg); }
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0, 0, 0, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+      user-select: none;
+    }
+    nav .logo {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffb300;
+      letter-spacing: 0.1em;
+      font-family: 'Courier New', Courier, monospace;
+      text-shadow: 1px 1px 5px black;
+      cursor: default;
+    }
+    nav .menu-toggle {
+      font-size: 2rem;
+      color: #ffb300;
+      cursor: pointer;
+      display: none;
+      user-select: none;
+    }
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    ul.nav-links a {
+      color: #ffb300;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    ul.nav-links a:hover,
+    ul.nav-links a:focus {
+      color: #fff;
+    }
+    ul.nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: 0;
+      background: #ffb300;
+      transition: width 0.3s ease;
+    }
+    ul.nav-links a:hover::after,
+    ul.nav-links a:focus::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      max-width: 1000px;
+      margin: 5rem auto;
+      padding: 2.5rem 3rem;
+      background: rgba(0,0,0,0.5);
+      border-radius: 16px;
+      box-shadow: 0 0 30px #ff6f0055;
+      backdrop-filter: blur(10px);
+      color: #fffde7;
+    }
+    h1, h2 {
+      color: #ffb300;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 4px black;
+      font-weight: 700;
+    }
+    #about p {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    /* Featured videos */
+    .featured-videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .featured-videos iframe {
+      flex: 1 1 320px;
+      max-width: 350px;
+      height: 210px;
+      border-radius: 14px;
+      border: 3px solid #ffb300cc;
+      box-shadow: 0 0 20px #ffb300bb;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: black;
+    }
+    .featured-videos iframe:hover,
+    .featured-videos iframe:focus {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px #fff200ee;
+      border-color: #fff200ee;
+      outline: none;
+    }
+
+    /* Social links */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      color: #00ffd1;
+      text-decoration: none;
+      gap: 0.6rem;
+      transition: color 0.3s ease;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    .social-links a:hover,
+    .social-links a:focus {
+      color: #00fff4;
+      border-bottom-color: #00fff4;
+      outline: none;
+    }
+    .social-links a i {
+      font-size: 1.6rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.85rem;
+      color: #ddd;
+      letter-spacing: 0.06em;
+      border-top: 1px solid #ffb30055;
+      margin-top: 6rem;
+      user-select: none;
+      font-style: italic;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      section {
+        margin: 3rem 1.5rem;
+        padding: 2rem 2rem;
+      }
+      .featured-videos iframe {
+        max-width: 100%;
+        height: 200px;
+      }
+    }
+    @media (max-width: 768px) {
+      nav .menu-toggle {
+        display: block;
+      }
+      ul.nav-links {
+        position: fixed;
+        top: 64px;
+        right: 0;
+        width: 250px;
+        background: rgba(0, 0, 0, 0.95);
+        height: calc(100% - 64px);
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 2.5rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        box-shadow: -3px 0 8px rgba(0,0,0,0.7);
+        font-size: 1.2rem;
+        z-index: 1100;
+      }
+      ul.nav-links.active {
+        transform: translateX(0);
+      }
+      ul.nav-links li {
+        width: 100%;
+      }
+      ul.nav-links a {
+        padding: 0.25rem 0;
+        display: block;
+      }
+      body.menu-open {
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo" aria-label="Site Logo">Septileye</div>
+    <div class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" role="button" tabindex="0">☰</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#featured">Featured Videos</a></li>
+      <li><a href="#social">Social Media</a></li>
+    </ul>
+  </nav>
+
+  <section id="about" tabindex="0">
+    <h1>Welcome to My Minecraft Channel</h1>
+    <p>
+      Hey there! I’m Septileye, and on my channel, I bring you the best of Minecraft with a perfect mix of information and entertainment. Whether you want to master redstone engineering, explore epic survival strategies, or just have some fun watching cool builds and adventures,
